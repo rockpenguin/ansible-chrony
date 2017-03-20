@@ -1,0 +1,52 @@
+{{ ansible_managed | comment }}
+
+{% for server_line in chrony_ntp_servers %}
+server {{ server_line }}
+{% endfor %}
+
+{% if chrony_server == true %}
+{% for allow_net in chrony_server_allow_nets %}
+allow {{ allow_net }}
+{% endfor %}
+{% endif %}
+
+# Record the rate at which the system clock gains/losses time.
+driftfile {{ chrony_drift_file | default('/var/lib/chrony/drift') }}
+
+{% if chrony_dumponexit %}
+# Dump measurements when daemon exits.
+dumponexit
+dumpdir {{ chrony_dumpdir | default('/var/lib/chrony') }}
+{% endif %}
+
+{% if chrony_rtsync %}
+# Enable kernel RTC synchronization.
+rtsync
+{% endif %}
+
+# Step the system clock instead of slew if difference > threshold
+# makestep threshold limit
+makestep {{ chrony_makestep | default('10 3') }}
+
+{% if chrony_bindcmdaddress is defined %}
+{% for address in chrony_bindcmdaddress %}
+bindcmdaddress {{ address }}
+{% endfor %}
+{% else %}
+# Listen for commands only on localhost.
+bindcmdaddress 127.0.0.1
+bindcmdaddress ::1
+{% endif %}
+
+# Specify the keyfile and key used as password for chronyc.
+keyfile {{ chrony_keys_file | default('/etc/chrony.keys') }}
+commandkey {{ chrony_commandkey | default('1') }}
+
+# Disable logging of client accesses.
+#noclientlog
+
+# Send a message to syslog if a clock adjustment is larger than 0.5 seconds.
+logchange {{ chrony_logchange | default('0.5') }}
+
+log {{ chrony_log_options | default('tracking measurements statistics') }}
+logdir {{ chrony_log_dir | default('/var/log/chrony') }}

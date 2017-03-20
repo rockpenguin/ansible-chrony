@@ -1,0 +1,27 @@
+---
+## file: roles/ansible-chrony/tasks/main.yml
+
+- name: Getting vars from the distro specific file
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+    - "_chrony_default.yml"
+
+# only run the following tasks when the OS is supported; we don't want to munge anything
+- block:
+  - name: Making sure Chrony NTP package is installed
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ chrony_packages }}"
+
+  - name: Making changes to the Chrony config file via template
+    template:
+      src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}_chrony.conf.j2"
+      dest: "{{ chrony_config_file }}"
+      owner: "{{ chrony_config_file_owner }}"
+      group: "{{ chrony_config_file_group }}"
+      mode: "{{ chrony_config_file_mode }}"
+    notify: restart_chrony
+
+  when: chrony_os_supported

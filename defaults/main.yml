@@ -1,0 +1,17 @@
+---
+## file: roles/ansible-chrony/defaults/main.yml
+
+chrony_server: false
+chrony_ntp_servers:
+  - "0.us.pool.ntp.org iburst minpoll 8"
+  - "1.us.pool.ntp.org iburst minpoll 8"
+  - "2.us.pool.ntp.org iburst minpoll 8"
+  - "3.us.pool.ntp.org iburst minpoll 8"
+chrony_server_allow_nets:
+  - "10/8"
+  - "192.168/16"
+  - "172.16/12"
+
+chrony_dumponexit: false
+chrony_rtconutc: false
+chrony_rtsync: false

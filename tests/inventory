@@ -1,0 +1,5 @@
+# put your test hosts below, e.g.
+
+centos-seven-test		ansible_host=10.147.10.157
+debian-eight-test		ansible_host=10.147.10.159
+ubuntu-16-test			ansible_host=10.147.10.156
