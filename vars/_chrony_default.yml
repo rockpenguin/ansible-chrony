@@ -1,5 +1,0 @@
----
-## file: roles/ansible-chrony/vars/_chrony_default.yml
-## default vars for chrony.conf file
-
-chrony_os_supported: false

@@ -1,11 +1,14 @@
 ---
 ## file: roles/ansible-chrony/tasks/main.yml
 
-- name: Getting vars from the distro specific file
+- name: Getting chrony vars from the distro specific file
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
-    - "_chrony_default.yml"
+    - files:
+      - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+      paths:
+       - roles/ansible-chrony/vars/
+      skip: true
 
 # only run the following tasks when the OS is supported; we don't want to munge anything
 - block:

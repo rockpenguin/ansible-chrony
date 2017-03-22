@@ -1,6 +1,7 @@
 ---
 ## file: roles/ansible-chrony/defaults/main.yml
 
+chrony_os_supported: false
 chrony_server: false
 chrony_ntp_servers:
   - "0.us.pool.ntp.org iburst minpoll 8"
