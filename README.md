@@ -6,33 +6,48 @@ Installs and configures the chronyd service for NTP.  This is for both server an
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* A supported distribution:
+  * CentOS 7
+  * Debian 8 (Jessie)
+  * Ubuntu 16 (Xenial)
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+A list of the more common variables. For the defaults, it is good to check the [default vars](defaults/main.yml)
+
+Example from the CentOS_7.yml vars file:
+
+	```yaml
+	chrony_os_supported: true
+	chronyd_binary: /sbin/chronyd
+	chronyc_binary: /bin/chronyc
+	chrony_service: chronyd
+	chrony_packages:
+	  - chrony
+	chrony_config_file: /etc/chrony.conf
+	chrony_keys_file: /etc/chrony.keys
+	chrony_drift_file: /var/lib/chrony/drift
+	chrony_config_file_owner: root
+	chrony_config_file_group: root
+	chrony_config_file_mode: "0644"
+	```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Just simply include the role within your playbook. If you need to adjust any of the vars, you can simply include a vars/distribution.yml (e.g. vars/CentOS_7.yml) file within your playbook structure.
 
-    - hosts: servers
+    - hosts: www1 www2
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: username.rolename}
 
 License
 -------
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
