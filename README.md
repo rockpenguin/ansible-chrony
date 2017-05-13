@@ -18,20 +18,20 @@ A list of the more common variables. For the defaults, it is good to check the [
 
 Example from the CentOS_7.yml vars file:
 
-	```yaml
-	chrony_os_supported: true
-	chronyd_binary: /sbin/chronyd
-	chronyc_binary: /bin/chronyc
-	chrony_service: chronyd
-	chrony_packages:
-	  - chrony
-	chrony_config_file: /etc/chrony.conf
-	chrony_keys_file: /etc/chrony.keys
-	chrony_drift_file: /var/lib/chrony/drift
-	chrony_config_file_owner: root
-	chrony_config_file_group: root
-	chrony_config_file_mode: "0644"
-	```
+```yaml
+chrony_os_supported: true
+chronyd_binary: /sbin/chronyd
+chronyc_binary: /bin/chronyc
+chrony_service: chronyd
+chrony_packages:
+  - chrony
+chrony_config_file: /etc/chrony.conf
+chrony_keys_file: /etc/chrony.keys
+chrony_drift_file: /var/lib/chrony/drift
+chrony_config_file_owner: root
+chrony_config_file_group: root
+chrony_config_file_mode: "0644"
+```
 
 Dependencies
 ------------
