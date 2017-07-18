@@ -32,6 +32,34 @@ chrony_config_file_owner: root
 chrony_config_file_group: root
 chrony_config_file_mode: "0644"
 ```
+By default, this role will setup the box as an NTP client, using the host values you will setup in your playbook vars/group_vars folders.  For example, you might have an infratructure playbook called `hostconfig.yml` that pulls in the chront role:
+
+```yaml
+roles:
+    - ansible-sshd
+    - ansible-chrony
+```
+and then a file in your **group_vars** folder that is named the same as a group in your inventory file, e.g. **ntp_servers**.
+
+playbook vars file: **group_vars/ntp_servers**
+```yaml
+chrony_server: true
+chrony_ntp_servers:
+  - "0.us.pool.ntp.org iburst minpoll 8"
+  - "1.us.pool.ntp.org iburst minpoll 8"
+  - "2.us.pool.ntp.org iburst minpoll 8"
+  - "3.us.pool.ntp.org iburst minpoll 8"
+chrony_server_allow_nets:
+  - "192.168.3/24"
+```
+this role's Jinja2 template file:
+```jinja2
+{% if chrony_server == true %}
+{% for allow_net in chrony_server_allow_nets %}
+allow {{ allow_net }}
+{% endfor %}
+{% endif %}
+```
 
 Dependencies
 ------------
