@@ -51,3 +51,9 @@ License
 -------
 
 BSD
+
+## Author
+
+Dave Heebner <dave@rockpenguin.com>
+
+&copy; 2017, Rockpenguin Technology, LLC
