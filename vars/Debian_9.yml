@@ -1,5 +1,5 @@
 ---
-## file: roles/ansible-chrony/vars/Debian_8.yml
+## file: roles/ansible-chrony/vars/Debian_9.yml
 ## default vars for chrony.conf file
  
 chrony_os_supported: true

@@ -9,6 +9,7 @@ Requirements
 * A supported distribution:
   * CentOS 7
   * Debian 8 (Jessie)
+  * Debian 9 (Stretch)
   * Ubuntu 16 (Xenial)
 
 Role Variables
