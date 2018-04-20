@@ -38,4 +38,4 @@ rtcsync
 
 # Step the system clock instead of slewing it if the adjustment is larger than
 # one second, but only in the first three clock updates.
-makestep {{ chrony_makestep | default('10 3') }}
+makestep {{ chrony_makestep | default('1 3') }}
